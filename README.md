@@ -28,6 +28,39 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/enhance
 ## Installatie
 <!-- Bij Installatie staat hoe een andere developer aan jouw repo kan werken -->
 
+## Test
+Zeker! Hier is een korte en duidelijke samenvatting voor in je README:
+
+---
+
+## 🔍 Performance Analyse DHL Website
+
+### ✅ **Lighthouse & PageSpeed - Mobiel**
+- **Score:** PageSpeed 71% / Lighthouse 67%
+- **Sterk:** 
+  - CSS en afbeeldingen zijn geoptimaliseerd
+  - Snelle serverreactietijd
+  - Weinig omleidingen
+- **Verbeterpunten:**
+  - Te veel (niet-gebruikte) CSS/JS
+  - Afbeeldingen niet altijd het juiste formaat
+  - Verouderde afbeeldingsformaten
+
+### ✅ **Lighthouse & PageSpeed - Desktop**
+- **Score:** PageSpeed 94% / Lighthouse 96%
+- **Sterk:**
+  - Snelle JS-uitvoering
+  - Lazy loading voor afbeeldingen
+  - Goede responsieve instellingen
+- **Verbeterpunten:**
+  - Niet-gebruikte JS verwijderen
+  - Juiste videoformaten gebruiken
+  - Render-blocking bronnen beperken
+
+---
+
+Laat me weten als je het ook in het Engels nodig hebt of in een specifiek format (bijv. Markdown, HTML).
+
 ## Bronnen
 
 ## Licentie
