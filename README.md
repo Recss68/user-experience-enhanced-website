@@ -29,7 +29,6 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/enhance
 <!-- Bij Installatie staat hoe een andere developer aan jouw repo kan werken -->
 
 ## Test
-Zeker! Hier is een korte en duidelijke samenvatting voor in je README:
 
 ---
 
