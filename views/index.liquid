@@ -1,0 +1,15 @@
+{% render 'partials/head.liquid' %}
+
+<section class="home-list">
+    <ul>
+        {% for task in task %}
+         <a href="/{{ task.title | downcase | replace: ' ', '-' }}">
+            <li>
+                <img class="thumb" src="assets/{{task.title}}.png">
+            </li>
+        </a>
+        {% endfor %}
+    </ul>
+</section>
+
+{% render 'partials/foot.liquid' %}
