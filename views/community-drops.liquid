@@ -1,5 +1,23 @@
 {% render 'partials/head.liquid' %}
 
+<section class="popover inactive" id="popover">
+    <div class="success-message inactive" id="success-message">
+        <h2>Toegevoegd aan 💧 Drops</h2>
+    </div>
+    <button class="close-popover">X</button>
+    <div class="popover-content" id="popover-content">
+        <h2>Je hebt zojuist een mooie stap volbracht.</h2>
+        <p>Wil je anderen steunen door je gevoelens over deze oefening te delen?</p>
+    </div>
+    <form method="post" action="/community-drops" data-enhanced="formulier">
+        <label>Naam</label>
+        <input type="text" name="from" aria-label="Naam" placeholder="b.v John Doe" required>
+        <label>Uw Bericht</label>
+        <textarea name="text" aria-label="Bericht" placeholder="b.v Ik heb een vraag" required></textarea>
+        <button type="submit">Ervaring Delen</button>
+    </form>
+</section>
+
 <section class="drops-head">
     <div class="icon-container">
         <button class="back-button" aria-label="Terug"><a href="/het-verlies-aanvaarden">←</a></button>
