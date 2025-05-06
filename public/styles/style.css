@@ -64,6 +64,9 @@ body {
     a {
         text-decoration: none;
     }
+    @media (min-width: 800px) {
+        flex-direction: row;
+    }
     }
 }
 
@@ -151,12 +154,27 @@ body {
         filter: blur(100px);
         z-index: -1;
         top: 25%;   
+        @media ( min-width: 1000px ) {
+            width: 15em;
+        }
     }
     .gradient-left {
         left: -25%;
+        @media (min-width: 800px) {
+            left: -10%;
+        }
+        @media ( min-width: 1000px ) {
+            left: -5%;
+        }
     }
     .gradient-right {
         right: -25%;
+        @media (min-width: 800px) {
+            right: -10%;
+        }
+        @media ( min-width: 1000px ) {
+            right: -5%;
+        }
     }
     .hero-text{
         margin: 40px 40px 0 40px;
@@ -186,6 +204,11 @@ body {
         text-align: center;
         padding: 30px 70px 100px 70px;
     }
+    @media (min-width: 1400px) {
+        display: flex;
+        align-items: center;
+        padding: 50px;
+    }
 }
 
 .exercise-card {
@@ -198,6 +221,14 @@ body {
     padding-bottom: 15px;
     margin-bottom: 15px;
     border: 1px solid var(--gray);
+    @media (min-width: 800px) {
+        margin: 0 auto;
+        margin-bottom: 15px;
+        width: 60%;
+    }
+    @media (min-width: 1000px) {
+        margin-right: 10px;
+    }
 }
 
 .exercise-card.inactive { 
