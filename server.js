@@ -43,3 +43,31 @@ app.get('/het-verlies-aanvaarden', async function (request, response) {
   })
 })
 
+// Ophalen en plaatsen van data voor de community drops pagina
+
+app.get('/community-drops', async function (request, response) {
+    const dropsResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"_and":[{"from":{"_contains":"Recep_"}}]}&sort=-date_created`)
+    const dropsResponseJSON = await dropsResponse.json()
+  
+    response.render('community-drops.liquid', {
+      title: "community-drops",
+      drops: dropsResponseJSON.data,
+    })
+  })
+  
+  app.post('/community-drops', async function (request, response) {
+  
+    await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
+      method: 'POST',
+      body: JSON.stringify({
+        from: `Recep_${request.body.from}`,     
+        text: request.body.text
+      }),
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      }
+    });
+  
+    response.redirect(303, '/community-drops');
+  })
+  
