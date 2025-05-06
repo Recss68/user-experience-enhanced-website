@@ -27,3 +27,19 @@ app.set('port', process.env.PORT || 8000)
 app.listen(app.get('port'), function () {
   console.log(`Application started on http://localhost:${app.get('port')}`)
 })
+
+
+// Ophalen van data voor de opdrachten pagina
+
+app.get('/het-verlies-aanvaarden', async function (request, response) {
+  const taskResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_task/?filter={"id":1}')
+  const exerciseResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_exercise/?filter={"task":1}')
+  const taskResponseJSON = await taskResponse.json()
+  const exerciseResponseJSON = await exerciseResponse.json()
+
+  response.render('het-verlies-aanvaarden.liquid', {
+    task: taskResponseJSON.data,
+    exercise: exerciseResponseJSON.data
+  })
+})
+
