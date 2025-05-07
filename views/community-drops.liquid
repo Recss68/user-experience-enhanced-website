@@ -1,20 +1,24 @@
 {% render 'partials/head.liquid' %}
 
 <section class="popover inactive" id="popover">
-    <div class="success-message inactive" id="success-message">
-        <h2>Toegevoegd aan 💧 Drops</h2>
-    </div>
+    {% if gelukt %}
+        <div class="success-message" id="success-message">
+            <h2>Toegevoegd aan 💧 Drops</h2>
+        </div>
+    {% endif %}
     <button class="close-popover">X</button>
     <div class="popover-content" id="popover-content">
         <h2>Je hebt zojuist een mooie stap volbracht.</h2>
         <p>Wil je anderen steunen door je gevoelens over deze oefening te delen?</p>
     </div>
     <form method="post" action="/community-drops" data-enhanced="formulier">
-        <label>Naam</label>
-        <input type="text" name="from" aria-label="Naam" placeholder="b.v John Doe" required>
-        <label>Uw Bericht</label>
-        <textarea name="text" aria-label="Bericht" placeholder="b.v Ik heb een vraag" required></textarea>
-        <button type="submit">Ervaring Delen</button>
+        <label for="name">Naam
+        <input type="text" name="from" placeholder="b.v John Doe" required>
+        </label>
+        <label for="text">Uw Bericht
+        <textarea name="text" placeholder="b.v Ik heb een vraag" required></textarea>
+        </label>
+        <button name="submit" type="submit">Ervaring Delen</button>
     </form>
 </section>
 
@@ -33,24 +37,94 @@
     <img class="gradient-left" src="assets/Het verlies aanvaarden.png">
     <h2>Nieuwste Berichten</h2>
 
-{% if drops and drops.size > 0 %}
+<div class="skeleton-wrapper" id="skeleton-wrapper">
     {% for drop in drops %}
-        {% if drop.text %}
-            <article class="bericht">
-                <div class="bericht-info">
-                    <h3>{{ drop.from | replace: "Recep_", "" }}</h3>
-                    <p>Op {{ drop.date_created | date: "%-d %B" }}</p>
-                </div>
-                <p class="bericht-text">
-                    {{ drop.text }}
-                </p>
-            </article>
-        {% endif %}
+    <div class="skeleton bericht"></div>
     {% endfor %}
-{% else %}
-    <h3>Nog geen berichten geplaatst</h3>
-{% endif %}  
+</div>
+
+<div class="drops-wrapper" id="drops-wrapper" style="display: none;">
+  {% if drops and drops.size > 0 %}
+      {% for drop in drops %}
+          {% if drop.text %}
+              <article class="bericht">
+                  <div class="bericht-info">
+                      <h3>{{ drop.from | replace: "Recep_", "" }}</h3>
+                      <p>Op {{ drop.date_created | date: "%-d %B" }}</p>
+                  </div>
+                  <p class="bericht-text">
+                      {{ drop.text }}
+                  </p>
+              </article>
+          {% endif %}
+      {% endfor %}
+  {% else %}
+      <h3>Nog geen berichten geplaatst</h3>
+  {% endif %}
+</div>
 </section>
 
+
+{% comment %} <script type="sdsd">
+
+  // Als er ergens op de pagina een formulier wordt gesubmit..
+  // (We maken hier gebruik van Event Delegation)
+  document.addEventListener('submit', async function(event) {
+
+    // Hou in een variabele bij welk formulier dat was
+    const form = event.target
+
+    // Als dit formulier geen data-enhanced attribuut heeft, doe dan niks speciaals (laat het formulier normaal versturen)
+    // Dit doen we, zodat we sommige formulieren op de pagina kunnen 'enhancen'
+    // Door ze bijvoorbeeld data-enhanced="true" of data-enhanced="formulier-3" te geven.
+    // Data attributen mag je zelf verzinnen: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_data_attributes
+    if (!form.hasAttribute('data-enhanced')) {
+      return
+    }
+
+    // Voorkom de standaard submit van de browser
+    // Let op: hiermee overschrijven we de default Loading state van de browser...
+    event.preventDefault()
+
+    // Verzamel alle formuliervelden van het formulier
+    let formData = new FormData(form)
+
+    // En voeg eventueel de name en value van de submit button toe aan die data
+    // https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
+    if (event.submitter) {
+      formData.append(event.submitter.name, event.submitter.value)
+    }
+
+    // Doe een fetch naar de server, net als hoe de browser dit normaal zou doen
+    // Gebruik daarvoor het action en method attribuut van het originele formulier
+    // Inclusief alle formuliervelden
+    const response = await fetch(
+      form.action, {
+      method: form.method,
+      body: new URLSearchParams(formData)
+    })
+
+    // De server redirect op de normale manier, en geeft HTML terug
+    // (De server weet niet eens dat deze fetch via client-side JavaScript gebeurde)
+    const responseText = await response.text()
+
+    // Normaal zou de browser die HTML parsen en weergeven, maar daar moeten we nu zelf iets mee
+    // Parse de nieuwe HTML en maak hiervan een nieuw Document Object Model in het geheugen
+    const parser = new DOMParser()
+    const responseDOM = parser.parseFromString(responseText, 'text/html')
+
+    // Zoek in die nieuwe HTML DOM onze nieuwe UI state op, die we via Liquid hebben klaargemaakt
+    // We gebruiken hiervoor het eerdere data-enhanced attribuut, zodat we weten waar we naar moeten zoeken
+    // In de nieuwe HTML zoeken we bijvoorbeeld naar data-enhanced="true" of data-enhanced="formulier-3"
+    // (Hierdoor kunnen we ook meerdere formulieren op dezelfde pagina gebruiken)
+    const newState = responseDOM.querySelector('[data-enhanced="' + form.getAttribute('data-enhanced') + '"]')
+
+    // Overschrijf ons formulier met de nieuwe HTML
+    // Hier wil je waarschijnlijk de Loading state vervangen door een Success state
+    form.outerHTML = newState.outerHTML
+
+  })
+
+</script> {% endcomment %}
 
 {% render 'partials/foot-drops.liquid' %}

@@ -11,6 +11,9 @@ app.engine('liquid', engine.express());
 
 app.set('views', './views')
 
+// Maak werken met data uit formulieren iets prettiger
+app.use(express.urlencoded({extended: true}))
+
 app.get('/', async function (request, response) {
   const taskResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_task')
   const taskResponseJSON = await taskResponse.json()
@@ -43,7 +46,9 @@ app.get('/het-verlies-aanvaarden', async function (request, response) {
   })
 })
 
-// Ophalen en plaatsen van data voor de community drops pagina
+// Ophalen en plaatsen van data voor de community drops pagina\
+
+let gelukt = false
 
 app.get('/community-drops', async function (request, response) {
     const dropsResponse = await fetch(`https://fdnd-agency.directus.app/items/dropandheal_messages?filter={"_and":[{"from":{"_contains":"Recep_"}}]}&sort=-date_created`)
@@ -52,9 +57,11 @@ app.get('/community-drops', async function (request, response) {
     response.render('community-drops.liquid', {
       title: "community-drops",
       drops: dropsResponseJSON.data,
+      gelukt: gelukt
     })
+    gelukt = false;
   })
-  
+
   app.post('/community-drops', async function (request, response) {
   
     await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages', {
@@ -67,6 +74,7 @@ app.get('/community-drops', async function (request, response) {
         'Content-Type': 'application/json;charset=UTF-8'
       }
     });
+    gelukt = true;
   
     response.redirect(303, '/community-drops');
   })

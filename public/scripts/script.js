@@ -7,8 +7,13 @@ document.querySelectorAll(".message-btn, .close-popover").forEach(btn => {
     });
 });
 
-// Success state handling
-document.querySelector("form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Voorkom standaard form-verzending
-        document.querySelector('.success-message').classList.remove('inactive');
-});
+document.addEventListener("DOMContentLoaded", function () {
+    const skeleton = document.getElementById("skeleton-wrapper");
+    const drops = document.getElementById("drops-wrapper");
+  
+
+    setTimeout(() => {
+      if (skeleton) skeleton.style.display = "none";
+      if (drops) drops.style.display = "block";
+    }, 2000);
+  });
