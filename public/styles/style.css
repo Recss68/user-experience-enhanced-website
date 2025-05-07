@@ -400,6 +400,95 @@ body {
 }
 
 
+.popover {
+    background-color: var(--background-color);
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+    bottom: -100%;
+    transition: bottom 0.4s ease-in-out; /* Smooth animatie */
+    .close-popover {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: var(--size-xs);
+        cursor: pointer;
+        float: right;
+        padding: 25px;
+    }
+    .popover-content {
+        padding: 50px 25px 0 25px;
+        h2 {
+            font-size: var(--size-sm);
+        }
+        p {
+            color: var(--gray);
+        }
+    }
+    form {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        height: 50vh;
+        justify-content: center;
+        padding: 100px;
+        gap: 20px;
+        label {
+            font-size: var(--size-xxs);
+        }
+        input, textarea {
+            border: 1px solid var(--input-field);
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--input-field);
+            color: var(--gray);
+            @media ( min-width: 1000px ) {
+                margin: 0 auto;
+                width: 30%;
+            }
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 20px 15px 20px;
+            background-color: var(--blue);
+            color: var(--text-color);
+            border: 1px solid var(--blue);
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: var(--size-default);
+            @media ( min-width: 1000px ) {
+                margin: 0 auto;
+                width: 30%;
+            }
+        }
+    }
+}
+
+.popover.active {
+    bottom: 0;
+}
+
+.success-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color);
+    background-color: var(--success-state);
+    border-radius: 30px 30px 0 0;
+    display: block;
+    opacity: 1;
+    transition: display 0.5s ease-in;
+    h2 {
+        font-weight: bold;
+        font-size: var(--size-xxs);
+    }
+}
+
+.success-message.inactive {
+    opacity: 0;
+    display: none;
+}
+
+
 /* Community Drops styling END */
 
 footer {
