@@ -38,6 +38,10 @@
 
 }
 
+@view-transition {
+    navigation: auto;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -49,7 +53,6 @@ body {
     background-color: var(--background-color);
     font-family: "DM Serif Display";
 }
-
 
 .home-list {
     display: flex;
