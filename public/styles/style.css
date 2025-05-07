@@ -282,7 +282,116 @@ body {
     margin-top: 10px;
 }
 
-/* Exercise page stling END */
+/* Exercise page styling END */
+
+.community-drops {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+.drop-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.drop-text {
+    font-size: 12px;
+}
+
+.info-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.msg-btn-container {
+    display: flex;
+    justify-content: center;
+    .message-btn {
+        position: fixed;
+        bottom: 1%;
+        width: 55%;
+        padding: 15px 20px 15px 20px;
+        background-color: var(--blue);
+        color: var(--text-color);
+        border: 1px solid var(--blue);
+        border-radius: 50px;
+    }
+}
+
+.drops-head {
+    background-color: var(--exercise-bg);
+    padding: 30px;
+    text-align: left;
+
+    .icon-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .back-button {
+        font-size: var(--size-xs);
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        a{
+            text-decoration: none;
+            color: var(--text-color);
+        }
+    }
+
+    h1 {
+        font-size: var(--size-sm);
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    p {
+        font-size: var(--size-default);
+        line-height: 1.6;
+        color: #ccc;
+    }
+}
+
+.berichten-container {
+    text-align: center;
+    padding: 20px;
+    h2 {
+        font-size: var(--size-sm);
+    }
+    img {
+        position: absolute;
+        width: 12em;
+        filter: blur(100px);
+        z-index: -1;
+        top: 50%;   
+    }
+    .bericht {
+        background-color: var(--exercise-bg);
+        margin-top: 15px;
+        padding: 25px 50px 50px 50px;
+        border: 1px solid var(--exercise-bg);
+        border-radius: 40px;
+        .bericht-info, .bericht-text {
+            text-align: left;
+            margin-top: 10px;
+        }
+    }
+}
+
+
+/* Community Drops styling END */
 
 footer {
     overflow: hidden;
